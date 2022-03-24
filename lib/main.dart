@@ -17,8 +17,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider(create: (context)=>AuthenticationService()),
-        RepositoryProvider(create: (context)=>TodoService()),
+        RepositoryProvider(create: (context) => AuthenticationService()),
+        RepositoryProvider(create: (context) => TodoService()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

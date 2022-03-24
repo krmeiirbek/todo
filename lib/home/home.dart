@@ -29,6 +29,17 @@ class HomePage extends StatelessWidget {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => TodosPage(username: state.username)));
             }
+            if (state is HomeInitial) {
+              if (state.error != null) {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text('Error'),
+                    content: Text(state.error!),
+                  ),
+                );
+              }
+            }
           },
           builder: (context, state) {
             if (state is HomeInitial) {
@@ -49,10 +60,21 @@ class HomePage extends StatelessWidget {
                         labelText: 'Password',
                       ),
                     ),
-                    ElevatedButton(
-                      onPressed: () => BlocProvider.of<HomeBloc>(context)
-                          .add(LoginEvent(username.text, password.text)),
-                      child: const Text('Login'),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () => BlocProvider.of<HomeBloc>(context)
+                              .add(LoginEvent(username.text, password.text)),
+                          child: const Text('Login'),
+                        ),
+                        ElevatedButton(
+                          onPressed: () => BlocProvider.of<HomeBloc>(context)
+                              .add(RegisterAccountEvent(
+                                  username.text, password.text)),
+                          child: const Text('Register'),
+                        ),
+                      ],
                     ),
                   ],
                 ),
